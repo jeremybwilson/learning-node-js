@@ -1,5 +1,7 @@
-var fs = require('fs')
+const fs = require('fs');
 
-fs.readdir('c:/', (err, data) => {
-    console.log(data)
+const macCodeFilePath = '/Users/jeremybwilson/Documents/Github/code/linkedin_learning/learning-node/';
+
+fs.readdir(macCodeFilePath, (err, data) => {
+    console.log(data);
 })

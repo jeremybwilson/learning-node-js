@@ -1,9 +1,10 @@
-var fs = require('fs')
+const fs = require('fs');
 
 var data = {
-    name: 'Bob'
+    name: 'Alex'
 }
-
-fs.writeFile('data.json', JSON.stringify(data), (err) =>{
-    console.log('write finished', err)
-})
+// stringify the data variable created above
+const stringifiedData = JSON.stringify(data);
+fs.writeFile('data.json', stringifiedData, (err) => {
+    console.log('write finished', err);
+});

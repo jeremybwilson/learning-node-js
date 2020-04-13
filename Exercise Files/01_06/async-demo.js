@@ -4,6 +4,7 @@ function phoneNumber(err, data) {
 	console.log('data:', data);
 }
 
-fs.readdir('/Users/jeremybwilson/Documents/Github/code/linkedin_learning/', phoneNumber);
+const macCodeFilePath = '/Users/jeremybwilson/Documents/Github/code/linkedin_learning/';
+fs.readdir(macCodeFilePath, phoneNumber);
 
 console.log("this comes after");

@@ -1,17 +1,20 @@
 {
-  "name": "05_01",
+  "name": "05_04",
   "version": "1.0.0",
-  "description": "",
+  "description": "Linkedin Learning",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Jeremy Wilson",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.15.5"
-  }
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "bugs": {
+    "url": "https://github.com/jeremybwilson/learning-node-js/issues"
+  },
+  "homepage": "https://github.com/jeremybwilson/learning-node-js#readme"
 }

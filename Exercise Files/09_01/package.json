@@ -7,16 +7,20 @@
     "test": "jasmine",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Jeremy Wilson",
   "license": "ISC",
+  "keywords": [],
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.15.5",
-    "mongoose": "^4.11.13",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
-    "jasmine": "^2.8.0"
-  }
+    "jasmine": "^3.5.0"
+  },
+  "bugs": {
+    "url": "https://github.com/jeremybwilson/learning-node-js/issues"
+  },
+  "homepage": "https://github.com/jeremybwilson/learning-node-js#readme"
 }

@@ -1,1 +1,1 @@
-exports.myText = "hello from module"
+exports.myText = "hello from my-module"

@@ -1,62 +1,74 @@
-var express = require('express')
-var bodyParser = require('body-parser')
-var app = express()
-var http = require('http').Server(app)
-var io = require('socket.io')(http)
-var mongoose = require('mongoose')
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const mongoose = require('mongoose');
 
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-mongoose.Promise = Promise
+mongoose.Promise = Promise;
 
-var dbUrl = 'mongodb://user:user@ds155424.mlab.com:55424/learning-node'
+const dbUrl = require('./mongodb-url').mongoDbURL;   //mongodb connection url
 
-var Message = mongoose.model('Message', {
-    name: String,
-    message: String
+const Message = mongoose.model('Message', {
+  name: String,
+  message: String
 })
 
 app.get('/messages', (req, res) => {
-    Message.find({}, (err, messages) => {
-        res.send(messages)
-    })
+  Message.find({}, (err, messages) => {
+      res.send(messages);
+  })
 })
 
 app.post('/messages', async (req, res) => {
-    var message = new Message(req.body)
+  const message = new Message(req.body)
 
-    var savedMessage = await message.save()
+  const savedMessage = await message.save();
 
-    console.log('saved')
+  console.log('saved')
 
-    var censored = await Message.findOne({ message: 'badword' })
+  const censored = await Message.findOne({ message: 'badword' })
 
-    if (censored) 
-        await Message.remove({ _id: censored.id })
-    else
-        io.emit('message', req.body)
+  if (censored)
+    await Message.deleteOne({ _id: censored.id })
+  else
+    io.emit('message', req.body)
 
-    res.sendStatus(200)
+  res.sendStatus(200)
 
-        // .catch((err) => {
-        //     res.sendStatus(500)
-        //     return console.error(err)
-        // })
+      // .catch((err) => {
+      //     res.sendStatus(500)
+      //     return console.error(err)
+      // })
 
 })
 
+// async function connectToMongoDb() {
+//   try {
+//     await mongoose.connect(dbUrl, { useNewUrlParser: true });
+//   } catch (error) {
+//     // handleError(error);
+//     console.log('mongo db connection', error)
+//   }
+// }
 
+// connectToMongoDb();
 
 io.on('connection', (socket) => {
-    console.log('a user connected')
+  console.log('a user connected');
 })
 
-mongoose.connect(dbUrl, { useMongoClient: true }, (err) => {
-    console.log('mongo db connection', err)
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, (err) => {
+  console.log('mongo db connection', err);
 })
 
-var server = http.listen(3000, () => {
-    console.log('server is listening on port', server.address().port)
+const server = http.listen(3000, () => {
+  console.log('server is listening on port', server.address().port);
 })

@@ -1,17 +1,18 @@
-var express = require('express')
-var app = express()
+const express = require('express');
+const app = express();
 
-app.use(express.static(__dirname))
+app.use(express.static(__dirname));
 
-var messages = [
-    {name: 'Tim', message: 'Hi'},
-    {name: 'Jane', message: 'Hello'}
+const messages = [
+  {name: 'Alex', message: 'Hi'},
+  {name: 'Anika', message: 'Hello'},
+  {name: 'Dad', message: 'I love you'}
 ]
 
 app.get('/messages', (req, res) =>{
-    res.send(messages)
-})
+  res.send(messages);
+});
 
-var server = app.listen(3000, () => {
-    console.log('server is listening on port', server.address().port)
-})
+const server = app.listen(3000, () => {
+  console.log('server is listening on port', server.address().port);
+});
